@@ -1,0 +1,2015 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planeación Q2 2026 — Kiai S.A.S</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        /* ══════════════════════════════════════════════════
+           VARIABLES & RESET
+        ══════════════════════════════════════════════════ */
+        :root {
+            --primary: #87cac1;
+            --primary-dark: #5aada3;
+            --accent: #ff8c42;
+            --accent-dark: #e07030;
+            --bg-color: #eaf3f2;
+            --bg-card: #dde9e7;
+            --bg-card2: #e4efed;
+            --shadow-out: 6px 6px 14px #c3d5d3, -6px -6px 14px #ffffff;
+            --shadow-in: inset 4px 4px 10px #c3d5d3, inset -4px -4px 10px #ffffff;
+            --text: #2c4a47;
+            --text-light: #4a7570;
+            --text-muted: #7aa8a3;
+            --green: #22c55e;
+            --yellow: #f59e0b;
+            --red: #ef4444;
+            --purple: #8b5cf6;
+            --blue: #3b82f6;
+            --radius: 18px;
+            --radius-sm: 10px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-color);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* ══════════════════════════════════════════════════
+           PROGRESS BAR
+        ══════════════════════════════════════════════════ */
+        #progress-bar {
+            position: fixed;
+            top: 0; left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            width: 0%;
+            z-index: 9999;
+            transition: width 0.3s ease;
+            border-radius: 0 2px 2px 0;
+        }
+
+        /* ══════════════════════════════════════════════════
+           SLIDE COUNTER & NAV DOTS
+        ══════════════════════════════════════════════════ */
+        #slide-counter {
+            position: fixed;
+            bottom: 24px;
+            right: 80px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+            z-index: 100;
+            letter-spacing: 1px;
+        }
+
+        .nav-indicator {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 100;
+        }
+
+        .nav-dot {
+            width: 9px; height: 9px;
+            border-radius: 50%;
+            background: rgba(135,202,193,0.3);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: var(--shadow-out);
+        }
+
+        .nav-dot.active {
+            background: var(--primary);
+            transform: scale(1.5);
+            box-shadow: 0 0 10px rgba(135,202,193,0.6);
+        }
+
+        .nav-dot:hover { background: var(--primary-dark); }
+
+        /* ══════════════════════════════════════════════════
+           SLIDE BASE
+        ══════════════════════════════════════════════════ */
+        .slide {
+            min-height: 100vh;
+            padding: 64px 80px 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            scroll-snap-align: start;
+        }
+
+        .slide-footer {
+            position: absolute;
+            bottom: 20px;
+            left: 80px; right: 80px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            color: var(--text-muted);
+            opacity: 0.6;
+        }
+
+        /* ══════════════════════════════════════════════════
+           SLIDE 1 — PORTADA
+        ══════════════════════════════════════════════════ */
+        .slide-cover {
+            background: linear-gradient(135deg, #c9e8e4 0%, #eaf3f2 40%, #fde8d8 100%);
+            text-align: center;
+            align-items: center;
+        }
+
+        .cover-logo {
+            width: 120px;
+            margin-bottom: 28px;
+            filter: drop-shadow(0 4px 12px rgba(135,202,193,0.4));
+        }
+
+        .cover-badge {
+            background: var(--bg-card);
+            box-shadow: var(--shadow-out);
+            border-radius: 30px;
+            padding: 8px 24px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--primary-dark);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 28px;
+        }
+
+        .cover-title {
+            font-size: 72px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary-dark), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.1;
+            margin-bottom: 12px;
+        }
+
+        .cover-subtitle {
+            font-size: 22px;
+            font-weight: 300;
+            color: var(--text-light);
+            margin-bottom: 40px;
+        }
+
+        .cover-flight {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            margin: 6px 0 26px;
+        }
+
+        .cover-flight::before {
+            content: "";
+            width: 140px;
+            height: 4px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, rgba(20,184,166,0.15), rgba(20,184,166,0.75));
+            box-shadow: 0 0 0 6px rgba(255,255,255,0.22);
+        }
+
+        .cover-plane {
+            font-size: 28px;
+            filter: drop-shadow(0 6px 12px rgba(20,184,166,0.18));
+            transform: rotate(18deg);
+        }
+
+        .cover-stats {
+            display: flex;
+            gap: 32px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .cover-stat {
+            background: var(--bg-card);
+            box-shadow: var(--shadow-out);
+            border-radius: var(--radius);
+            padding: 20px 28px;
+            text-align: center;
+            min-width: 120px;
+        }
+
+        .cover-stat .cs-num {
+            font-size: 32px;
+            font-weight: 900;
+            color: var(--primary-dark);
+        }
+
+        .cover-stat .cs-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 4px;
+            font-weight: 500;
+        }
+
+        .cover-author {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        /* ══════════════════════════════════════════════════
+           SECTION HEADER
+        ══════════════════════════════════════════════════ */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 36px;
+        }
+
+        .section-icon {
+            width: 56px; height: 56px;
+            background: var(--bg-card);
+            box-shadow: var(--shadow-out);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            flex-shrink: 0;
+        }
+
+        .section-header h2 {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--text);
+            line-height: 1.2;
+        }
+
+        .section-header p {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* ══════════════════════════════════════════════════
+           NEOMORPHISM CARD
+        ══════════════════════════════════════════════════ */
+        .neo-card {
+            background: var(--bg-card);
+            box-shadow: var(--shadow-out);
+            border-radius: var(--radius);
+            padding: 28px;
+        }
+
+        .neo-card-sm {
+            background: var(--bg-card);
+            box-shadow: var(--shadow-out);
+            border-radius: var(--radius-sm);
+            padding: 18px 22px;
+        }
+
+        /* ══════════════════════════════════════════════════
+           GRID LAYOUTS
+        ══════════════════════════════════════════════════ */
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+        .grid-6 { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
+
+        /* ══════════════════════════════════════════════════
+           STAT CARD (BIG NUMBER)
+        ══════════════════════════════════════════════════ */
+        .stat-card {
+            background: var(--bg-card);
+            box-shadow: var(--shadow-out);
+            border-radius: var(--radius);
+            padding: 24px 20px;
+            text-align: center;
+        }
+
+        .stat-card .sc-num {
+            font-size: 42px;
+            font-weight: 900;
+            line-height: 1;
+        }
+
+        .stat-card .sc-label {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 6px;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        /* ══════════════════════════════════════════════════
+           PROGRESS ITEMS
+        ══════════════════════════════════════════════════ */
+        .progress-item {
+            margin-bottom: 14px;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--text);
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: var(--shadow-in);
+            box-shadow: var(--shadow-in);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 10px;
+            transition: width 1.5s ease;
+        }
+
+        .fill-teal { background: linear-gradient(90deg, var(--primary), var(--primary-dark)); }
+        .fill-orange { background: linear-gradient(90deg, var(--accent), var(--accent-dark)); }
+        .fill-green { background: linear-gradient(90deg, #22c55e, #16a34a); }
+        .fill-yellow { background: linear-gradient(90deg, #f59e0b, #d97706); }
+        .fill-purple { background: linear-gradient(90deg, #8b5cf6, #7c3aed); }
+        .fill-blue { background: linear-gradient(90deg, #3b82f6, #2563eb); }
+        .fill-red { background: linear-gradient(90deg, #ef4444, #dc2626); }
+        .fill-gray { background: linear-gradient(90deg, #9ca3af, #6b7280); }
+
+        /* ══════════════════════════════════════════════════
+           STATUS TAGS
+        ══════════════════════════════════════════════════ */
+        .tag {
+            display: inline-block;
+            padding: 3px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+
+        .tag-done    { background: rgba(34,197,94,0.12);  color: #16a34a; }
+        .tag-partial { background: rgba(245,158,11,0.12); color: #b45309; }
+        .tag-new     { background: rgba(139,92,246,0.12); color: #7c3aed; }
+        .tag-deferred{ background: rgba(156,163,175,0.15); color: #6b7280; }
+        .tag-critical{ background: rgba(239,68,68,0.12);  color: #dc2626; }
+        .tag-active  { background: rgba(135,202,193,0.2); color: var(--primary-dark); }
+        .tag-holiday { background: rgba(255,140,66,0.12); color: var(--accent-dark); }
+
+        /* ══════════════════════════════════════════════════
+           MILESTONE / HITO CARDS
+        ══════════════════════════════════════════════════ */
+        .hito-card {
+            background: var(--bg-card);
+            box-shadow: var(--shadow-out);
+            border-radius: var(--radius);
+            padding: 28px;
+            border-left: 5px solid var(--primary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hito-card::before {
+            content: '';
+            position: absolute;
+            top: 0; right: 0;
+            width: 120px; height: 120px;
+            background: radial-gradient(circle at top right, rgba(135,202,193,0.08), transparent);
+            border-radius: 0 var(--radius) 0 100%;
+        }
+
+        .hito-date {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .hito-title {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .hito-desc {
+            font-size: 13px;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* ══════════════════════════════════════════════════
+           SPRINT CARD
+        ══════════════════════════════════════════════════ */
+        .sprint-card {
+            background: var(--bg-card);
+            box-shadow: var(--shadow-out);
+            border-radius: var(--radius-sm);
+            padding: 18px 14px;
+            text-align: center;
+            transition: transform 0.2s;
+            border-top: 4px solid var(--primary);
+        }
+
+        .sprint-card:hover { transform: translateY(-4px); }
+        .sprint-card.critical { border-top-color: var(--accent); }
+        .sprint-card.active  { border-top-color: var(--green); box-shadow: 0 0 0 2px rgba(34,197,94,0.2), var(--shadow-out); }
+
+        .sp-num {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--primary-dark);
+            margin-bottom: 4px;
+        }
+
+        .sprint-card.critical .sp-num { color: var(--accent); }
+        .sprint-card.active   .sp-num { color: var(--green); }
+
+        .sp-dates { font-size: 10px; color: var(--text-muted); margin-bottom: 8px; }
+
+        .sp-focus {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text);
+            line-height: 1.5;
+        }
+
+        .sp-cap {
+            margin-top: 8px;
+            font-size: 10px;
+            color: var(--text-muted);
+        }
+
+        /* ══════════════════════════════════════════════════
+           TASK LIST (CHECKLIST STYLE)
+        ══════════════════════════════════════════════════ */
+        .task-list { list-style: none; }
+
+        .task-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(135,202,193,0.12);
+            font-size: 13px;
+            color: var(--text);
+            line-height: 1.5;
+        }
+
+        .task-list li:last-child { border-bottom: none; }
+
+        .task-icon {
+            flex-shrink: 0;
+            width: 20px; height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            margin-top: 2px;
+        }
+
+        .ti-pending  { background: rgba(245,158,11,0.15); color: #b45309; }
+        .ti-new      { background: rgba(139,92,246,0.15); color: #7c3aed; }
+        .ti-critical { background: rgba(239,68,68,0.15);  color: #dc2626; }
+        .ti-done     { background: rgba(34,197,94,0.15);  color: #16a34a; }
+        .ti-teal     { background: rgba(135,202,193,0.2); color: var(--primary-dark); }
+
+        /* ══════════════════════════════════════════════════
+           KPI CARD
+        ══════════════════════════════════════════════════ */
+        .kpi-card {
+            background: var(--bg-card);
+            box-shadow: var(--shadow-out);
+            border-radius: var(--radius);
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .kpi-icon {
+            width: 48px; height: 48px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            flex-shrink: 0;
+        }
+
+        .kpi-label {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 2px;
+        }
+
+        .kpi-value {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--text);
+            line-height: 1.2;
+        }
+
+        .kpi-sub {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        /* ══════════════════════════════════════════════════
+           FESTIVO CHIP
+        ══════════════════════════════════════════════════ */
+        .festivo-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255,140,66,0.08);
+            border: 1px solid rgba(255,140,66,0.25);
+            border-radius: 20px;
+            padding: 4px 12px;
+            font-size: 11px;
+            color: var(--accent-dark);
+            font-weight: 600;
+        }
+
+        /* ══════════════════════════════════════════════════
+           RISK CARD
+        ══════════════════════════════════════════════════ */
+        .risk-card {
+            background: var(--bg-card);
+            box-shadow: var(--shadow-out);
+            border-radius: var(--radius);
+            padding: 20px 24px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .risk-title { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+        .risk-mit   { font-size: 12px; color: var(--text-light); line-height: 1.5; }
+        .risk-level {
+            display: inline-block;
+            margin-bottom: 8px;
+            padding: 2px 10px;
+            border-radius: 10px;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .rl-high   { background: rgba(239,68,68,0.12);  color: #dc2626; }
+        .rl-medium { background: rgba(245,158,11,0.12); color: #b45309; }
+        .rl-low    { background: rgba(34,197,94,0.12);  color: #16a34a; }
+
+        /* ══════════════════════════════════════════════════
+           TEAM CARD
+        ══════════════════════════════════════════════════ */
+        .team-card {
+            background: var(--bg-card);
+            box-shadow: var(--shadow-out);
+            border-radius: var(--radius);
+            padding: 24px;
+            text-align: center;
+        }
+
+        .team-avatar {
+            width: 64px; height: 64px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            margin: 0 auto 12px;
+            box-shadow: var(--shadow-out);
+        }
+
+        .team-name   { font-size: 14px; font-weight: 700; }
+        .team-role   { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+        .team-skills { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+
+        .skill-tag {
+            background: rgba(135,202,193,0.12);
+            border: 1px solid rgba(135,202,193,0.3);
+            border-radius: 20px;
+            padding: 2px 10px;
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+
+        /* ══════════════════════════════════════════════════
+           HIGHLIGHT BOX
+        ══════════════════════════════════════════════════ */
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(135,202,193,0.1), rgba(255,140,66,0.06));
+            border: 1px solid rgba(135,202,193,0.3);
+            border-radius: var(--radius);
+            padding: 20px 28px;
+            margin-top: 20px;
+        }
+
+        .highlight-box p {
+            font-size: 13px;
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        /* ══════════════════════════════════════════════════
+           CLOSING SLIDE
+        ══════════════════════════════════════════════════ */
+        .slide-closing {
+            background: linear-gradient(135deg, #c9e8e4 0%, #eaf3f2 50%, #fde8d8 100%);
+            text-align: center;
+            align-items: center;
+        }
+
+        /* ══════════════════════════════════════════════════
+           ANIMATIONS
+        ══════════════════════════════════════════════════ */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        /* ══════════════════════════════════════════════════
+           RESPONSIVE
+        ══════════════════════════════════════════════════ */
+        @media (max-width: 1024px) {
+            .slide { padding: 40px 40px 70px; }
+            .cover-title { font-size: 48px; }
+            .grid-4 { grid-template-columns: repeat(2, 1fr); }
+            .grid-6 { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .slide { padding: 24px 24px 60px; }
+            .cover-title { font-size: 36px; }
+            .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+            .grid-6 { grid-template-columns: repeat(2, 1fr); }
+            .section-header h2 { font-size: 22px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Progress bar -->
+<div id="progress-bar"></div>
+<div id="slide-counter"></div>
+<nav class="nav-indicator" id="navDots"></nav>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 1 · PORTADA                                                 -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<section class="slide slide-cover" data-nav="Inicio">
+    <img src="assets/logo.png" class="cover-logo" alt="Kiai" onerror="this.style.display='none'">
+    <div class="cover-badge">Comité de Planeación · Q2 2026</div>
+    <h1 class="cover-title">Cogiendo Pista</h1>
+    <p class="cover-subtitle">Planeación Q2 2026 · Kiai S.A.S — Abril · Mayo · Junio</p>
+    <div class="cover-flight" aria-hidden="true">
+        <span class="cover-plane">✈️</span>
+    </div>
+
+    <div class="cover-stats fade-in">
+        <div class="cover-stat">
+            <div class="cs-num" style="color:var(--primary-dark);">6</div>
+            <div class="cs-label">Sprints<br>(7 al 12)</div>
+        </div>
+        <div class="cover-stat">
+            <div class="cs-num" style="color:var(--accent);">3</div>
+            <div class="cs-label">Hitos<br>críticos</div>
+        </div>
+        <div class="cover-stat">
+            <div class="cs-num" style="color:#8b5cf6;">7</div>
+            <div class="cs-label">Festivos<br>Q2</div>
+        </div>
+        <div class="cover-stat">
+            <div class="cs-num" style="color:#22c55e;">12</div>
+            <div class="cs-label">Objetivos<br>estratégicos</div>
+        </div>
+        <div class="cover-stat">
+            <div class="cs-num" style="color:#f59e0b;">5</div>
+            <div class="cs-label">Integrantes<br>equipo</div>
+        </div>
+    </div>
+
+    <p class="cover-author">Maritza Ruiz · Líder Técnica &nbsp;|&nbsp; Abril 2026</p>
+
+    <div class="slide-footer">
+        <span>Kiai S.A.S — Planeación Q2 2026</span>
+        <span>Confidencial · Solo uso interno</span>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 2 · BALANCE Q1 — PUNTO DE PARTIDA                           -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<section class="slide" data-nav="Balance Q1">
+    <div class="section-header">
+        <div class="section-icon">🏁</div>
+        <div>
+            <h2>Balance Q1 — Punto de Partida</h2>
+            <p>Con qué base arrancamos el Q2 · Enero–Marzo 2026</p>
+        </div>
+    </div>
+
+    <div class="grid-4 fade-in" style="margin-bottom:24px;">
+        <div class="stat-card">
+            <div class="sc-num" style="color:var(--green);">97%</div>
+            <div class="sc-label">Portal Angular<br><small>el proyecto más grande del año</small></div>
+        </div>
+        <div class="stat-card">
+            <div class="sc-num" style="color:#22c55e;">$28.3M</div>
+            <div class="sc-label">Renovación / clientes fantasmas<br><small>67 renovaciones · clientes que nunca habían pagado</small></div>
+        </div>
+        <div class="stat-card">
+            <div class="sc-num" style="color:#8b5cf6;">+6</div>
+            <div class="sc-label">Clientes / integraciones<br><small>estratégicos</small></div>
+        </div>
+        <div class="stat-card">
+            <div class="sc-num" style="color:var(--accent);">70%</div>
+            <div class="sc-label">Cumplimiento ponderado<br><small>vs plan Q1</small></div>
+        </div>
+    </div>
+
+    <div class="grid-2 fade-in">
+        <div class="neo-card">
+            <p style="font-size:13px;font-weight:700;margin-bottom:14px;color:var(--green);">✅ Lo que entregamos ≥90%</p>
+            <ul class="task-list">
+                <li><span class="task-icon ti-done"><i class="fa fa-check"></i></span>Portal Angular — <strong>97%</strong> · Go-live 6 de abril</li>
+                <li><span class="task-icon ti-done"><i class="fa fa-check"></i></span>Auto-onboarding + Gestión Usuarios — <strong>95%</strong></li>
+                <li><span class="task-icon ti-done"><i class="fa fa-check"></i></span>Kiai Firma — <strong>90%</strong> · Sale a producción esta semana</li>
+                <li><span class="task-icon ti-done"><i class="fa fa-check"></i></span>CRM Kommo — <strong>100%</strong> · $28.3M recaudados</li>
+                <li><span class="task-icon ti-done"><i class="fa fa-check"></i></span>Proyective — En producción</li>
+                <li><span class="task-icon ti-done"><i class="fa fa-check"></i></span>Schoolpack — Worker listo · esperando cliente</li>
+            </ul>
+        </div>
+        <div class="neo-card">
+            <p style="font-size:13px;font-weight:700;margin-bottom:14px;color:var(--accent);">🔄 Herencias que llegan al Q2</p>
+            <ul class="task-list">
+                <li><span class="task-icon ti-pending"><i class="fa fa-clock"></i></span>API SuperTransportes — <strong>70%</strong> · Retomado activamente</li>
+                <li><span class="task-icon ti-pending"><i class="fa fa-clock"></i></span>Versionamiento API .NET 8 — <strong>50%</strong></li>
+                <li><span class="task-icon ti-pending"><i class="fa fa-clock"></i></span>Cold Storage AWS S3 — <strong>30%</strong> · Worker SSIS listo</li>
+                <li><span class="task-icon ti-pending"><i class="fa fa-clock"></i></span>Plan Referido — <strong>0%</strong> · Reprogramado para priorizar ingresos y estabilización</li>
+                <li><span class="task-icon ti-pending"><i class="fa fa-clock"></i></span>Auto-cobro — <strong>0%</strong> · Reprogramado; Kommo cubrió parcialmente la necesidad</li>
+                <li><span class="task-icon ti-pending"><i class="fa fa-clock"></i></span>Documentación portal nuevo — <strong>0%</strong> · Sem 6–10 abril</li>
+                <li><span class="task-icon ti-pending"><i class="fa fa-clock"></i></span>Transportes Medellín — <strong>70%</strong> · Pre-junio</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="neo-card fade-in" style="margin-bottom:20px;background:linear-gradient(135deg,rgba(20,184,166,0.07),rgba(249,115,22,0.07));border:1px solid rgba(20,184,166,0.2);">
+        <p style="font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--primary-dark);margin-bottom:14px;">🤖 Impacto de la IA en Q1 — Inversión vs Ahorro</p>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:14px;">
+            <div style="text-align:center;">
+                <div style="font-size:22px;font-weight:800;color:var(--primary);">x3</div>
+                <div style="font-size:11px;color:var(--text-muted);">Velocidad de desarrollo<br>vs estimado sin IA</div>
+            </div>
+            <div style="text-align:center;">
+                <div style="font-size:22px;font-weight:800;color:#22c55e;">~$8K</div>
+                <div style="font-size:11px;color:var(--text-muted);">USD ahorrados en Q1<br>vs contratar expertos externos</div>
+            </div>
+            <div style="text-align:center;">
+                <div style="font-size:22px;font-weight:800;color:var(--accent);">50:1</div>
+                <div style="font-size:11px;color:var(--text-muted);">ROI estimado<br>Copilot + Codespaces ~$200/mes</div>
+            </div>
+            <div style="text-align:center;">
+                <div style="font-size:22px;font-weight:800;color:#8b5cf6;">7+</div>
+                <div style="font-size:11px;color:var(--text-muted);">Tecnologías nuevas<br>dominadas gracias a IA</div>
+            </div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;font-size:11px;">
+            <span style="background:rgba(20,184,166,0.12);padding:3px 10px;border-radius:20px;color:var(--primary-dark);">✅ AWS (ECS · RDS · Lambda · ALB · Terraform)</span>
+            <span style="background:rgba(20,184,166,0.12);padding:3px 10px;border-radius:20px;color:var(--primary-dark);">✅ Clean Architecture .NET 8</span>
+            <span style="background:rgba(20,184,166,0.12);padding:3px 10px;border-radius:20px;color:var(--primary-dark);">✅ GitHub Codespaces + DevContainers</span>
+            <span style="background:rgba(20,184,166,0.12);padding:3px 10px;border-radius:20px;color:var(--primary-dark);">✅ Angular 18 + pruebas E2E</span>
+            <span style="background:rgba(249,115,22,0.15);padding:3px 10px;border-radius:20px;color:var(--accent-dark);">📈 Infraestructura AWS completa: 2 días con IA vs 13–18 días sin IA</span>
+        </div>
+    </div>
+
+    <div class="highlight-box fade-in">
+        <p>💡 <strong>¿Por qué Q2 será diferente?</strong> El equipo de Customer Succed tiene autonomía creciente (en Q1 absorbió el 90% del tiempo de liderazgo). El Portal Angular está estabilizado — base sólida para escalar. Los proyectos de mayor impacto económico (Auto-cobro, Planes/Consumos, Wompy) están en la cima de la lista de Q2.</p>
+    </div>
+
+    <div class="slide-footer">
+        <span>Kiai S.A.S — Planeación Q2 2026</span>
+        <span>Balance Q1</span>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 3 · PENDIENTES HEREDADOS Q1 → Q2                            -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<section class="slide" data-nav="Pendientes Q1">
+    <div class="section-header">
+        <div class="section-icon">📋</div>
+        <div>
+            <h2>Pendientes Q1 que entran al Q2</h2>
+            <p>Frentes heredados y compromisos reprogramados que se ejecutan en Q2 · Por área</p>
+        </div>
+    </div>
+
+    <div class="grid-2 fade-in" style="gap:20px;">
+        <!-- Backend -->
+        <div class="neo-card">
+            <p style="font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--primary-dark);margin-bottom:14px;"><i class="fa fa-server" style="margin-right:6px;"></i>Backend & Liderazgo</p>
+            <ul class="task-list">
+                <li><span class="task-icon ti-pending"><i class="fa fa-clock"></i></span>API SuperTransportes → despliegue producción + pruebas + testing</li>
+                <li><span class="task-icon ti-pending"><i class="fa fa-clock"></i></span>Cold Storage AWS S3 → completar migración histórica</li>
+                <li><span class="task-icon ti-pending"><i class="fa fa-clock"></i></span>Reenvío automático masivo de docs electrónicos</li>
+                <li><span class="task-icon ti-pending"><i class="fa fa-clock"></i></span>Finalización versionamiento API .NET 8</li>
+                <li><span class="task-icon ti-pending"><i class="fa fa-clock"></i></span>Auto-cobro — recordatorios de pago</li>
+                <li><span class="task-icon ti-pending"><i class="fa fa-clock"></i></span>Revisión flujos nuevo portal · RIPS</li>
+            </ul>
+        </div>
+
+        <!-- Frontend -->
+        <div class="neo-card">
+            <p style="font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--accent-dark);margin-bottom:14px;"><i class="fa fa-desktop" style="margin-right:6px;"></i>Frontend Angular</p>
+            <ul class="task-list">
+                <li><span class="task-icon ti-pending"><i class="fa fa-clock"></i></span>Pruebas unitarias, integración y E2E — portal nuevo</li>
+                <li><span class="task-icon ti-pending"><i class="fa fa-clock"></i></span>Módulo equipo de trabajo</li>
+                <li><span class="task-icon ti-pending"><i class="fa fa-clock"></i></span>Auto-onboarding → habilitar facturador en DIAN</li>
+                <li><span class="task-icon ti-pending"><i class="fa fa-clock"></i></span>Sistema Gestión Cobro (Auto-cobro) — componentes UI + lógica</li>
+                <li><span class="task-icon ti-pending"><i class="fa fa-clock"></i></span>Editar RIPS en portal nuevo</li>
+                <li><span class="task-icon ti-pending"><i class="fa fa-clock"></i></span>Notas de ajuste, crédito y parcial — portal nuevo</li>
+                <li><span class="task-icon ti-new"><i class="fa fa-star"></i></span>Dashboard principal</li>
+            </ul>
+        </div>
+
+        <!-- Customer Succed -->
+        <div class="neo-card">
+            <p style="font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#8b5cf6;margin-bottom:14px;"><i class="fa fa-headset" style="margin-right:6px;"></i>Customer Succed</p>
+            <ul class="task-list">
+                <li><span class="task-icon ti-pending"><i class="fa fa-clock"></i></span>Base de conocimiento portal nuevo</li>
+                <li><span class="task-icon ti-pending"><i class="fa fa-clock"></i></span>Preguntas frecuentes (FAQs) — portal nuevo</li>
+                <li><span class="task-icon ti-pending"><i class="fa fa-clock"></i></span>Videos tutoriales portal nuevo</li>
+                <li><span class="task-icon ti-pending"><i class="fa fa-clock"></i></span>Cierre y análisis de tickets portal nuevo</li>
+                <li><span class="task-icon ti-new"><i class="fa fa-star"></i></span>Reuniones periódicas con aliados (1 × mes)</li>
+                <li><span class="task-icon ti-new"><i class="fa fa-star"></i></span>Métricas de Customer Succed pendientes</li>
+            </ul>
+        </div>
+
+        <!-- Marketing -->
+        <div class="neo-card">
+            <p style="font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#ec4899;margin-bottom:14px;"><i class="fa fa-bullhorn" style="margin-right:6px;"></i>Marketing</p>
+            <ul class="task-list">
+                <li><span class="task-icon ti-pending"><i class="fa fa-clock"></i></span>Kiai Academy — alimentación módulo portal nuevo (videos/docs)</li>
+                <li><span class="task-icon ti-pending"><i class="fa fa-clock"></i></span>Blog eneatipos → integración chatbots IA en WordPress</li>
+                <li><span class="task-icon ti-done"><i class="fa fa-check"></i></span>Rediseño web WordPress — <strong>listo</strong> · Se publica en Q2</li>
+                <li><span class="task-icon ti-pending"><i class="fa fa-clock"></i></span>Creación de GIFs portal nuevo</li>
+                <li><span class="task-icon ti-pending"><i class="fa fa-clock"></i></span>Documentación técnica y de usuario portal nuevo</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="slide-footer">
+        <span>Kiai S.A.S — Planeación Q2 2026</span>
+        <span>Pendientes Q1</span>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 4 · OBJETIVOS ESTRATÉGICOS Q2                               -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<section class="slide" data-nav="Objetivos Q2">
+    <div class="section-header">
+        <div class="section-icon">🎯</div>
+        <div>
+            <h2>Objetivos Estratégicos Q2 2026</h2>
+            <p>12 objetivos priorizados · Técnicos + Protección de Ingresos + Crecimiento</p>
+        </div>
+    </div>
+
+    <div class="grid-2 fade-in" style="gap:20px;margin-bottom:20px;">
+        <!-- Columna izquierda: Técnicos e infra -->
+        <div>
+            <p style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--primary-dark);margin-bottom:12px;">⚙️ Infraestructura & Técnico</p>
+            <ul class="task-list">
+                <li><span class="task-icon ti-teal" style="font-weight:700;font-size:10px;">1</span>Actualizar <strong>documentación completa</strong> de Kiai — APIs, portales, guías usuario</li>
+                <li><span class="task-icon ti-teal" style="font-weight:700;font-size:10px;">2</span>Migrar <strong>30% infra S3</strong> + APIs en el primer mes · Balanceo de carga</li>
+                <li><span class="task-icon ti-teal" style="font-weight:700;font-size:10px;">3</span>Validar DTOs · <strong>Desacople emisión (Colas)</strong> · Endpoints por tipo de operación</li>
+                <li><span class="task-icon ti-teal" style="font-weight:700;font-size:10px;">4</span>Exponer <strong>Maestros de datos</strong> DIAN / Kiai</li>
+                <li><span class="task-icon ti-teal" style="font-weight:700;font-size:10px;">5</span>Limpieza datos prioritarios en BD <em style="color:var(--text-muted)">(11M registros)</em></li>
+                <li><span class="task-icon ti-teal" style="font-weight:700;font-size:10px;">6</span><strong>Optimización flujos</strong> de servicios</li>
+            </ul>
+        </div>
+
+        <!-- Columna derecha: Protección ingresos + crecimiento -->
+        <div>
+            <p style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:12px;">💰 Protección de Ingresos — NO PERDER PLATA</p>
+            <ul class="task-list">
+                <li><span class="task-icon ti-critical" style="font-weight:700;font-size:10px;">7</span><strong>Automatización compra planes</strong> — acelerar conversión, registro y vencimientos</li>
+                <li><span class="task-icon ti-critical" style="font-weight:700;font-size:10px;">8</span><strong>Automatizar consumos Kiai</strong> — control de uso, monetización y retención</li>
+                <li><span class="task-icon ti-critical" style="font-weight:700;font-size:10px;">9</span>Envío info nuevos clientes a <strong>Kommo</strong> — visibilidad comercial y seguimiento automático</li>
+            </ul>
+            <p style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#8b5cf6;margin-top:16px;margin-bottom:12px;">🚀 Crecimiento & Nuevas Funcionalidades</p>
+            <ul class="task-list">
+                <li><span class="task-icon ti-new" style="font-weight:700;font-size:10px;">10</span><strong>Vista Aliados</strong> + Sistema Multinivel — escalamiento comercial y fidelización</li>
+                <li><span class="task-icon ti-new" style="font-weight:700;font-size:10px;">11</span><strong>Centro de Notificaciones + plantillas personalizadas de correos</strong> — vista marketing, consistencia de marca y trazabilidad</li>
+                <li><span class="task-icon ti-new" style="font-weight:700;font-size:10px;">12</span><strong>Kiai Academy</strong> — autoservicio, onboarding y menor carga operativa</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="highlight-box fade-in">
+        <p>🔑 <strong>Plan de Referidos — Fase de preparación:</strong> se prioriza su diseño funcional en Q2 y su aceleración operativa dependerá de la priorización definida para Q3. No bloquea los objetivos de protección de ingresos del trimestre.</p>
+    </div>
+
+    <div class="slide-footer">
+        <span>Kiai S.A.S — Planeación Q2 2026</span>
+        <span>Objetivos Estratégicos</span>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 5 · PRIORITARIO Q2 — BACKLOG TÉCNICO                        -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<section class="slide" data-nav="Backlog Q2">
+    <div class="section-header">
+        <div class="section-icon">⭐</div>
+        <div>
+            <h2>Backlog Técnico Prioritario Q2</h2>
+            <p>Ítems técnicos con mayor impacto en ingresos y experiencia de cliente</p>
+        </div>
+    </div>
+
+    <div class="grid-2 fade-in" style="gap:20px;">
+        <div>
+            <p style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:12px;">🔥 Alta Prioridad — Impacto Económico Directo</p>
+            <ul class="task-list">
+                <li><span class="task-icon ti-critical"><i class="fa fa-fire"></i></span><strong>0. Planes y Consumos automatizados</strong> — cobro automático, registro de compras</li>
+                <li><span class="task-icon ti-critical"><i class="fa fa-credit-card"></i></span><strong>1. Pasarela de Pagos Wompy</strong> — integración completa para reducir fricción de compra</li>
+                <li><span class="task-icon ti-critical"><i class="fa fa-wallet"></i></span><strong>2. Kiai Wallet</strong> — motor de compensación para activar crecimiento por red</li>
+                <li><span class="task-icon ti-critical"><i class="fa fa-bell"></i></span><strong>3. Notificaciones vencimiento y cobro</strong> — prevención de fuga y recaudo oportuno</li>
+                <li><span class="task-icon ti-critical"><i class="fa fa-share"></i></span><strong>4. Envío de Leads a Kommo</strong> — registro automático y trazabilidad comercial</li>
+                <li><span class="task-icon ti-critical"><i class="fa fa-file-invoice-dollar"></i></span><strong>5. Nómina electrónica</strong> — fase 1 en Q2 (registro básico) · continuidad funcional prevista para Q3</li>
+            </ul>
+        </div>
+
+        <div>
+            <p style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--primary-dark);margin-bottom:12px;">📦 Funcionalidades Pendientes de Alto Valor</p>
+            <ul class="task-list">
+                <li><span class="task-icon ti-teal"><i class="fa fa-pen"></i></span><strong>6. Editar facturas</strong> y servicio crear facturas en borrador</li>
+                <li><span class="task-icon ti-teal"><i class="fa fa-inbox"></i></span><strong>7. Vista documentos recepción</strong></li>
+                <li><span class="task-icon ti-teal"><i class="fa fa-chart-bar"></i></span><strong>8. Gráficas docs recepción</strong></li>
+                <li><span class="task-icon ti-teal"><i class="fa fa-truck"></i></span><strong>9. Front Kiai Transportes</strong> — sujeto a validación final de alcance en Q2</li>
+                <li><span class="task-icon ti-teal"><i class="fa fa-redo"></i></span><strong>10. Renotificación masiva</strong> de documentos electrónicos</li>
+                <li><span class="task-icon ti-teal"><i class="fa fa-envelope-open-text"></i></span><strong>11. Plantillas personalizadas de correos</strong> para marketing y aliados · mejor experiencia, control y trazabilidad</li>
+            </ul>
+
+            <div style="margin-top:16px;padding:16px;background:rgba(139,92,246,0.07);border-radius:var(--radius-sm);border-left:4px solid #8b5cf6;">
+                <p style="font-size:12px;font-weight:700;color:#7c3aed;margin-bottom:8px;"><i class="fa fa-pen-nib" style="margin-right:6px;"></i>KIAI FIRMA</p>
+                <p style="font-size:12px;color:var(--text-light);">Gestión de usuarios, roles y multi-tenant — Continúa con el sprint actual para cerrar al 100%</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-footer">
+        <span>Kiai S.A.S — Planeación Q2 2026</span>
+        <span>Backlog Prioritario</span>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 6 · HITOS CRÍTICOS Q2                                       -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<section class="slide" data-nav="Hitos">
+    <div class="section-header">
+        <div class="section-icon">🚩</div>
+        <div>
+            <h2>Hitos Críticos Q2</h2>
+            <p>Fechas inamovibles que definen el éxito del trimestre</p>
+        </div>
+    </div>
+
+    <div class="grid-3 fade-in" style="margin-bottom:24px;">
+        <div class="hito-card" style="border-left-color: var(--green);">
+            <div class="hito-date">🟢 Abril 2026 · Sprint 7–8</div>
+            <div class="hito-title">Cierre Sprint 7 · go-live portales + despliegue productivo AWS</div>
+            <div class="hito-desc">
+                <strong>Cierre Sprint 7:</strong> Go-live del nuevo portal de facturación para clientes<br>
+                <strong>Cierre Sprint 7:</strong> Despliegue a producción de Kiai Firma, nuevo portal de facturación y gestión de clientes sobre AWS<br>
+                <strong>Sprint 7:</strong> Documentación completa + GIFs + FAQs<br>
+                <strong>Cierre Sprint 7:</strong> Doctoralia — portal nuevo + facturas en borrador<br>
+                <strong>30 Abr:</strong> AWS S3 Cold Storage LIVE (>80% migrado, ~120M registros objetivo)
+            </div>
+            <div style="margin-top:12px;">
+                <span class="tag tag-critical">Cierre Sprint 7: Go-live AWS</span>
+                <span class="tag tag-critical">30 Abr: Hito S3</span>
+            </div>
+        </div>
+
+        <div class="hito-card" style="border-left-color: var(--accent);">
+            <div class="hito-date">🟠 Mayo 2026 · Sprint 9–10</div>
+            <div class="hito-title">Pasarela Wompy + Planes Automáticos</div>
+            <div class="hito-desc">
+                <strong>May:</strong> Pasarela de Pagos Wompy activa<br>
+                <strong>May:</strong> Automatización planes y consumos<br>
+                <strong>May:</strong> API SuperTransportes → producción<br>
+                <strong>May:</strong> Versionamiento .NET 8 completado<br>
+                <strong>Pre-Jun:</strong> Transportes Medellín → producción
+            </div>
+            <div style="margin-top:12px;">
+                <span class="tag tag-critical">Wompy + Planes: Mayo</span>
+            </div>
+        </div>
+
+        <div class="hito-card" style="border-left-color: var(--purple);">
+            <div class="hito-date">🟣 Junio 2026 · Sprint 11–12</div>
+            <div class="hito-title">Kiai Academy + Cierre Q2</div>
+            <div class="hito-desc">
+                <strong>Jun:</strong> Kiai Academy lanzamiento oficial<br>
+                <strong>Jun:</strong> Centro de Notificaciones live<br>
+                <strong>Jun:</strong> Vista Aliados activa<br>
+                <strong>30 Jun:</strong> Cierre Q2 · Retrospectiva · Prep Q3<br>
+                <strong>Jun:</strong> Nómina electrónica · fase 1 entregada y continuidad definida hacia Q3
+            </div>
+            <div style="margin-top:12px;">
+                <span class="tag tag-new">30 Jun: Cierre Q2</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="neo-card fade-in">
+        <p style="font-size:13px;font-weight:700;margin-bottom:12px;color:var(--text);">📅 Festivos Q2 — 7 días hábiles perdidos</p>
+        <div style="display:flex;flex-wrap:wrap;gap:10px;">
+            <span class="festivo-chip">🌅 Jue 2 Abr · Jueves Santo</span>
+            <span class="festivo-chip">✝️ Vie 3 Abr · Viernes Santo</span>
+            <span class="festivo-chip">👷 Vie 1 May · Día del Trabajo</span>
+            <span class="festivo-chip">⛪ Lun 18 May · Ascensión del Señor</span>
+            <span class="festivo-chip">🕊️ Lun 8 Jun · Corpus Christi</span>
+            <span class="festivo-chip">❤️ Lun 15 Jun · Sagrado Corazón</span>
+            <span class="festivo-chip">⛵ Lun 29 Jun · San Pedro y San Pablo</span>
+        </div>
+    </div>
+
+    <div class="slide-footer">
+        <span>Kiai S.A.S — Planeación Q2 2026</span>
+        <span>Hitos Críticos</span>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 7 · CALENDARIO DE SPRINTS Q2                                -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<section class="slide" data-nav="Calendario">
+    <div class="section-header">
+        <div class="section-icon">📅</div>
+        <div>
+            <h2>Calendario Q2 — Sprints 7 al 12</h2>
+            <p>Abril · Mayo · Junio 2026 · 6 sprints · 7 festivos</p>
+        </div>
+    </div>
+
+    <div class="grid-6 fade-in" style="margin-bottom:28px;">
+        <div class="sprint-card active">
+            <div class="sp-num">Sprint 7 ⚡ ACTIVO</div>
+            <div class="sp-dates">1 – 16 Abr</div>
+            <div class="sp-focus">Go-live portales<br>Terraform + pipelines AWS<br>Prod Firma / Facturación / Clientes</div>
+            <div class="sp-cap">10 días · 75h/pers</div>
+            <div style="margin-top:8px;"><span class="festivo-chip" style="font-size:10px;padding:2px 8px;">✝️ 2–3 Abr</span></div>
+        </div>
+        <div class="sprint-card critical">
+            <div class="sp-num">Sprint 8 🔥</div>
+            <div class="sp-dates">17 – 30 Abr</div>
+            <div class="sp-focus">S3 Cold Storage<br>LIVE 30 Abr<br>Auto-cobro inicio</div>
+            <div class="sp-cap">10 días · 75h/pers</div>
+        </div>
+        <div class="sprint-card">
+            <div class="sp-num">Sprint 9</div>
+            <div class="sp-dates">4 – 15 May</div>
+            <div class="sp-focus">API SuperTransp.<br>Wompy inicio<br>Planes automáticos</div>
+            <div class="sp-cap">10 días · 75h/pers</div>
+        </div>
+        <div class="sprint-card critical">
+            <div class="sp-num">Sprint 10 🔥</div>
+            <div class="sp-dates">19 May – 1 Jun</div>
+            <div class="sp-focus">Wompy activa<br>Planes completados<br>.NET 8 final</div>
+            <div class="sp-cap">10 días · 75h/pers</div>
+            <div style="margin-top:8px;"><span class="festivo-chip" style="font-size:10px;padding:2px 8px;">⛪ inicia tras 18 May</span></div>
+        </div>
+        <div class="sprint-card">
+            <div class="sp-num">Sprint 11</div>
+            <div class="sp-dates">2 – 17 Jun</div>
+            <div class="sp-focus">Kiai Academy<br>Vista Aliados<br>Centro Notif.</div>
+            <div class="sp-cap">10 días · 75h/pers</div>
+            <div style="margin-top:8px;"><span class="festivo-chip" style="font-size:10px;padding:2px 8px;">🕊️ 8 + 15 Jun</span></div>
+        </div>
+        <div class="sprint-card critical">
+            <div class="sp-num">Sprint 12 🔥 CIERRE</div>
+            <div class="sp-dates">18 – 30 Jun</div>
+            <div class="sp-focus">Cierre Q2<br>Retrospectiva<br>Prep Q3</div>
+            <div class="sp-cap">8 días · 60h/pers</div>
+            <div style="margin-top:8px;"><span class="festivo-chip" style="font-size:10px;padding:2px 8px;">⛵ 29 Jun</span></div>
+        </div>
+    </div>
+
+    <div class="grid-3 fade-in">
+        <div class="neo-card-sm" style="text-align:center;">
+            <div style="font-size:28px;font-weight:900;color:var(--primary-dark);">435h</div>
+            <div style="font-size:12px;color:var(--text-muted);">Capacidad total estimada<br>por persona en Q2</div>
+        </div>
+        <div class="neo-card-sm" style="text-align:center;">
+            <div style="font-size:28px;font-weight:900;color:var(--accent);">3</div>
+            <div style="font-size:12px;color:var(--text-muted);">Sprints críticos<br>(8, 10, 12)</div>
+        </div>
+        <div class="neo-card-sm" style="text-align:center;">
+            <div style="font-size:28px;font-weight:900;color:var(--green);">⚡</div>
+            <div style="font-size:12px;color:var(--text-muted);">Sprint 7 en curso<br>Hoy: 14 Abr 2026</div>
+        </div>
+    </div>
+
+    <div class="slide-footer">
+        <span>Kiai S.A.S — Planeación Q2 2026</span>
+        <span>Calendario Sprints</span>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 8 · SPRINT 7 ← ACTIVO AHORA                                -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<section class="slide" data-nav="Sprint 7">
+    <div class="section-header">
+        <div class="section-icon">⚡</div>
+        <div>
+            <h2>Sprint 7 — <span style="color:var(--green);">EN CURSO</span></h2>
+            <p>1–16 Abril · 10 días hábiles · 75h/persona · 🎉 Festivos: Jue 2 + Vie 3 Abr (Semana Santa)</p>
+        </div>
+    </div>
+
+    <div class="grid-2 fade-in" style="gap:20px;margin-bottom:20px;">
+        <div>
+            <p style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--green);margin-bottom:12px;"><i class="fa fa-server" style="margin-right:6px;"></i>Backend</p>
+            <ul class="task-list">
+                <li><span class="task-icon ti-critical"><i class="fa fa-rocket"></i></span>Nuevo portal de facturación → <strong>go-live clientes al cierre de Sprint 7</strong></li>
+                <li><span class="task-icon ti-critical"><i class="fa fa-cloud-upload-alt"></i></span><strong>Despliegue productivo AWS</strong> de Kiai Firma, portal de facturación y gestión de clientes al cierre de Sprint 7</li>
+                <li><span class="task-icon ti-teal"><i class="fa fa-truck"></i></span>API SuperTransportes → pruebas finales + testing</li>
+                <li><span class="task-icon ti-teal"><i class="fa fa-code-branch"></i></span>Terraform + pipelines AWS — cierre y estabilización de release</li>
+                <li><span class="task-icon ti-teal"><i class="fa fa-redo"></i></span>Revisión flujos RIPS en portal nuevo</li>
+                <li><span class="task-icon ti-teal"><i class="fa fa-users-cog"></i></span>Kiai Firma — gestión usuarios, roles y multi-tenant</li>
+            </ul>
+        </div>
+        <div>
+            <p style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:12px;"><i class="fa fa-desktop" style="margin-right:6px;"></i>Frontend</p>
+            <ul class="task-list">
+                <li><span class="task-icon ti-critical"><i class="fa fa-file-alt"></i></span><strong>Documentación portal nuevo</strong> — sem completa 6–10 Abr</li>
+                <li><span class="task-icon ti-teal"><i class="fa fa-images"></i></span>GIFs y capturas de pantalla portal nuevo</li>
+                <li><span class="task-icon ti-teal"><i class="fa fa-bug"></i></span>Corrección bugs y optimización post-lanzamiento</li>
+                <li><span class="task-icon ti-teal"><i class="fa fa-vials"></i></span>Pruebas unitarias básicas + integración + E2E</li>
+            </ul>
+        </div>
+        <div>
+            <p style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#8b5cf6;margin-bottom:12px;"><i class="fa fa-headset" style="margin-right:6px;"></i>Customer Succed</p>
+            <ul class="task-list">
+                <li><span class="task-icon ti-teal"><i class="fa fa-book"></i></span>Base de conocimiento portal nuevo — inicio</li>
+                <li><span class="task-icon ti-teal"><i class="fa fa-question-circle"></i></span>FAQs portal nuevo — primera versión</li>
+                <li><span class="task-icon ti-teal"><i class="fa fa-ticket-alt"></i></span>Cierre y análisis de tickets portal nuevo</li>
+            </ul>
+        </div>
+        <div>
+            <p style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#ec4899;margin-bottom:12px;"><i class="fa fa-bullhorn" style="margin-right:6px;"></i>Marketing + Clientes</p>
+            <ul class="task-list">
+                <li><span class="task-icon ti-critical"><i class="fa fa-hospital"></i></span><strong>Doctoralia</strong> — portal nuevo al cierre de Sprint 7</li>
+                <li><span class="task-icon ti-teal"><i class="fa fa-hospital"></i></span>Doctoralia — facturas en borrador al cierre de Sprint 7</li>
+                <li><span class="task-icon ti-teal"><i class="fa fa-video"></i></span>Videos tutoriales portal nuevo</li>
+                <li><span class="task-icon ti-teal"><i class="fa fa-graduation-cap"></i></span>Kiai Academy — inicio alimentación módulo portal</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="slide-footer">
+        <span>Kiai S.A.S — Planeación Q2 2026</span>
+        <span>Sprint 7 · 1–16 Abr · ACTIVO</span>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 9 · SPRINT 8 🔥 CRÍTICO                                      -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<section class="slide" data-nav="Sprint 8">
+    <div class="section-header">
+        <div class="section-icon">🔥</div>
+        <div>
+            <h2>Sprint 8 — <span style="color:var(--accent);">CRÍTICO</span></h2>
+            <p>17–30 Abril · 10 días hábiles · 75h/persona · 🚩 Hito: AWS S3 Cold Storage LIVE el 30 de Abril</p>
+        </div>
+    </div>
+
+    <div class="hito-card fade-in" style="margin-bottom:24px;background:linear-gradient(135deg,rgba(255,140,66,0.06),var(--bg-card));border-left-color:var(--accent);">
+        <div class="hito-date">🚩 30 DE ABRIL — ENTREGA CRÍTICA</div>
+        <div class="hito-title">AWS S3 Cold Storage — LIVE</div>
+        <div class="hito-desc">Migración histórica con avance objetivo superior al 80% · universo estimado de ~120 millones de registros (mínimo 100 millones) · reducción de costos de almacenamiento operativo</div>
+    </div>
+
+    <div class="grid-2 fade-in" style="gap:20px;">
+        <div>
+            <p style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:12px;"><i class="fa fa-server" style="margin-right:6px;"></i>Backend — Foco S3 + API</p>
+            <ul class="task-list">
+                <li><span class="task-icon ti-critical"><i class="fa fa-cloud"></i></span><strong>Cold Storage S3 → completar migración histórica (30 Abr)</strong></li>
+                <li><span class="task-icon ti-critical"><i class="fa fa-cloud"></i></span>Balanceo de carga · Pruebas de integridad docs</li>
+                <li><span class="task-icon ti-teal"><i class="fa fa-truck"></i></span>API SuperTransportes → cierre producción</li>
+                <li><span class="task-icon ti-teal"><i class="fa fa-code-branch"></i></span>Versionamiento .NET 8 — avance</li>
+                <li><span class="task-icon ti-teal"><i class="fa fa-redo"></i></span>Reenvío automático masivo docs electrónicos</li>
+            </ul>
+        </div>
+        <div>
+            <p style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--primary-dark);margin-bottom:12px;"><i class="fa fa-desktop" style="margin-right:6px;"></i>Frontend + Customer Succed</p>
+            <ul class="task-list">
+                <li><span class="task-icon ti-teal"><i class="fa fa-users"></i></span>Módulo equipo de trabajo</li>
+                <li><span class="task-icon ti-teal"><i class="fa fa-user-check"></i></span>Auto-onboarding → habilitar facturador en DIAN</li>
+                <li><span class="task-icon ti-teal"><i class="fa fa-file-invoice"></i></span>Sistema Gestión Cobro — componentes UI y lógica</li>
+                <li><span class="task-icon ti-teal"><i class="fa fa-headset"></i></span>Reunión periódica con aliados (1ª del Q2)</li>
+                <li><span class="task-icon ti-teal"><i class="fa fa-chart-line"></i></span>Métricas de Customer Succed — primera entrega</li>
+                <li><span class="task-icon ti-teal"><i class="fa fa-book"></i></span>Base de conocimiento Customer Succed — completar</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="slide-footer">
+        <span>Kiai S.A.S — Planeación Q2 2026</span>
+        <span>Sprint 8 · 17–30 Abr 🔥</span>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 10 · SPRINT 9                                               -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<section class="slide" data-nav="Sprint 9">
+    <div class="section-header">
+        <div class="section-icon">📦</div>
+        <div>
+            <h2>Sprint 9</h2>
+            <p>4–15 Mayo · 10 días hábiles · 75h/persona · Festivos: Vie 1 May (previo), Lun 18 May (previo al siguiente sprint)</p>
+        </div>
+    </div>
+
+    <div class="grid-2 fade-in" style="gap:20px;margin-bottom:20px;">
+        <div>
+            <p style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--primary-dark);margin-bottom:12px;"><i class="fa fa-server" style="margin-right:6px;"></i>Backend</p>
+            <ul class="task-list">
+                <li><span class="task-icon ti-critical"><i class="fa fa-truck"></i></span><strong>API SuperTransportes — producción oficial</strong></li>
+                <li><span class="task-icon ti-critical"><i class="fa fa-credit-card"></i></span><strong>Pasarela de Pagos Wompy — inicio integración</strong></li>
+                <li><span class="task-icon ti-critical"><i class="fa fa-fire"></i></span>Planes y Consumos automatizados — desarrollo</li>
+                <li><span class="task-icon ti-teal"><i class="fa fa-code-branch"></i></span>Versionamiento API .NET 8 — continuar</li>
+                <li><span class="task-icon ti-teal"><i class="fa fa-database"></i></span>Validar DTOs + Desacople emisión (Colas)</li>
+                <li><span class="task-icon ti-teal"><i class="fa fa-broom"></i></span>Limpieza datos prioritarios BD — inicio</li>
+            </ul>
+        </div>
+        <div>
+            <p style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:12px;"><i class="fa fa-desktop" style="margin-right:6px;"></i>Frontend + Customer Succed + Marketing</p>
+            <ul class="task-list">
+                <li><span class="task-icon ti-teal"><i class="fa fa-file-invoice"></i></span>Editar facturas + crear facturas en borrador</li>
+                <li><span class="task-icon ti-teal"><i class="fa fa-inbox"></i></span>Vista documentos recepción</li>
+                <li><span class="task-icon ti-teal"><i class="fa fa-share-alt"></i></span>Envío info nuevos clientes a Kommo — crear lead</li>
+                <li><span class="task-icon ti-teal"><i class="fa fa-users"></i></span>Reunión periódica aliados (2ª del Q2)</li>
+                <li><span class="task-icon ti-teal"><i class="fa fa-robot"></i></span>Blog eneatipos → integración chatbots IA WordPress</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="grid-3 fade-in">
+        <div class="neo-card-sm" style="border-left:4px solid var(--green);">
+            <p style="font-size:12px;font-weight:700;margin-bottom:4px;">Transportes Medellín</p>
+            <p style="font-size:12px;color:var(--text-muted);">Acompañamiento integración con Xenco · Cierre pre-junio</p>
+            <span class="tag tag-partial" style="margin-top:8px;display:inline-block;">~70% → cierre</span>
+        </div>
+        <div class="neo-card-sm" style="border-left:4px solid #8b5cf6;">
+            <p style="font-size:12px;font-weight:700;margin-bottom:4px;">Nómina Electrónica</p>
+            <p style="font-size:12px;color:var(--text-muted);">Arranque de fase 1 sujeto a priorización ejecutiva del trimestre</p>
+            <span class="tag tag-new" style="margin-top:8px;display:inline-block;">Inicio Sprint 9</span>
+        </div>
+        <div class="neo-card-sm" style="border-left:4px solid var(--primary);">
+            <p style="font-size:12px;font-weight:700;margin-bottom:4px;">Maestros de datos DIAN/Kiai</p>
+            <p style="font-size:12px;color:var(--text-muted);">Exponer endpoints — facilita integraciones</p>
+            <span class="tag tag-active" style="margin-top:8px;display:inline-block;">Desarrollo Sprint 9</span>
+        </div>
+    </div>
+
+    <div class="slide-footer">
+        <span>Kiai S.A.S — Planeación Q2 2026</span>
+        <span>Sprint 9 · 4–15 May</span>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 11 · SPRINT 10 🔥 CRÍTICO                                    -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<section class="slide" data-nav="Sprint 10">
+    <div class="section-header">
+        <div class="section-icon">🔥</div>
+        <div>
+            <h2>Sprint 10 — <span style="color:var(--accent);">CRÍTICO</span></h2>
+            <p>19 Mayo–1 Junio · 10 días hábiles · 75h/persona · Arranca tras festivo Lun 18 May (Ascensión)</p>
+        </div>
+    </div>
+
+    <div class="hito-card fade-in" style="margin-bottom:24px;background:linear-gradient(135deg,rgba(255,140,66,0.06),var(--bg-card));border-left-color:var(--accent);">
+        <div class="hito-date">🚩 FIN DE MAYO — ENTREGA CRÍTICA</div>
+        <div class="hito-title">Wompy activa + Planes y Consumos automatizados</div>
+        <div class="hito-desc">Pasarela de pagos Wompy funcional para todos los clientes · Cobro automático de planes activado · Reducción drástica de cartera vencida · Mayor ROI previsto del Q2</div>
+    </div>
+
+    <div class="grid-2 fade-in" style="gap:20px;">
+        <div>
+            <p style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:12px;"><i class="fa fa-server" style="margin-right:6px;"></i>Backend — Monetización</p>
+            <ul class="task-list">
+                <li><span class="task-icon ti-critical"><i class="fa fa-credit-card"></i></span><strong>Pasarela Wompy — integración completa · LIVE</strong></li>
+                <li><span class="task-icon ti-critical"><i class="fa fa-fire"></i></span><strong>Planes y Consumos automatizados — LIVE</strong></li>
+                <li><span class="task-icon ti-critical"><i class="fa fa-bell"></i></span>Notificaciones vencimiento y cobro de planes</li>
+                <li><span class="task-icon ti-teal"><i class="fa fa-code-branch"></i></span>Versionamiento API .NET 8 — <strong>completar 100%</strong></li>
+                <li><span class="task-icon ti-teal"><i class="fa fa-wallet"></i></span>Kiai Wallet — estimación sprints y diseño</li>
+                <li><span class="task-icon ti-teal"><i class="fa fa-cogs"></i></span>Optimización flujos de servicios</li>
+            </ul>
+        </div>
+        <div>
+            <p style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--primary-dark);margin-bottom:12px;"><i class="fa fa-desktop" style="margin-right:6px;"></i>Frontend + Customer Succed</p>
+            <ul class="task-list">
+                <li><span class="task-icon ti-teal"><i class="fa fa-chart-bar"></i></span>Gráficas documentos recepción</li>
+                <li><span class="task-icon ti-teal"><i class="fa fa-truck"></i></span>Front Kiai Transportes — sujeto a validación final de alcance</li>
+                <li><span class="task-icon ti-teal"><i class="fa fa-edit"></i></span>Editar RIPS en portal nuevo</li>
+                <li><span class="task-icon ti-teal"><i class="fa fa-sticky-note"></i></span>Notas de ajuste, crédito y parcial</li>
+                <li><span class="task-icon ti-teal"><i class="fa fa-users"></i></span>Reunión periódica aliados (3ª del Q2)</li>
+                <li><span class="task-icon ti-teal"><i class="fa fa-graduation-cap"></i></span>Kiai Academy — contenido avanzado</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="slide-footer">
+        <span>Kiai S.A.S — Planeación Q2 2026</span>
+        <span>Sprint 10 · 19 May–1 Jun 🔥</span>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 12 · SPRINT 11                                              -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<section class="slide" data-nav="Sprint 11">
+    <div class="section-header">
+        <div class="section-icon">🎓</div>
+        <div>
+            <h2>Sprint 11</h2>
+            <p>2–17 Junio · 10 días hábiles · 75h/persona · Festivos: Lun 8 Jun (Corpus Christi) + Lun 15 Jun (Sagrado Corazón)</p>
+        </div>
+    </div>
+
+    <div class="grid-2 fade-in" style="gap:20px;margin-bottom:20px;">
+        <div>
+            <p style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--primary-dark);margin-bottom:12px;"><i class="fa fa-server" style="margin-right:6px;"></i>Backend + Frontend</p>
+            <ul class="task-list">
+                <li><span class="task-icon ti-critical"><i class="fa fa-layer-group"></i></span><strong>Sistema Multinivel</strong> — desarrollo</li>
+                <li><span class="task-icon ti-critical"><i class="fa fa-handshake"></i></span><strong>Vista Aliados</strong> — módulo completo</li>
+                <li><span class="task-icon ti-critical"><i class="fa fa-bell"></i></span><strong>Centro de Notificaciones</strong> portal nuevo</li>
+                <li><span class="task-icon ti-teal"><i class="fa fa-bullhorn"></i></span>Vista dedicada marketing en Centro Notif.</li>
+                <li><span class="task-icon ti-teal"><i class="fa fa-wallet"></i></span>Kiai Wallet — desarrollo fase 1 tras validación de alcance y priorización</li>
+                <li><span class="task-icon ti-teal"><i class="fa fa-file-invoice-dollar"></i></span>Nómina electrónica — registro básico en Q2 · continuidad funcional en Q3</li>
+            </ul>
+        </div>
+        <div>
+            <p style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#ec4899;margin-bottom:12px;"><i class="fa fa-bullhorn" style="margin-right:6px;"></i>Marketing + Customer Succed</p>
+            <ul class="task-list">
+                <li><span class="task-icon ti-critical"><i class="fa fa-graduation-cap"></i></span><strong>Kiai Academy — módulo en portal · Lanzamiento</strong></li>
+                <li><span class="task-icon ti-teal"><i class="fa fa-vial"></i></span>Pruebas finales Academy antes del lanzamiento</li>
+                <li><span class="task-icon ti-teal"><i class="fa fa-users"></i></span>Reunión periódica aliados (4ª del Q2)</li>
+                <li><span class="task-icon ti-teal"><i class="fa fa-chart-line"></i></span>Métricas de Customer Succed Q2 — análisis parcial</li>
+                <li><span class="task-icon ti-teal"><i class="fa fa-redo"></i></span>Renotificación masiva de docs electrónicos</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="grid-3 fade-in">
+        <div class="neo-card-sm" style="text-align:center;border-left:4px solid var(--green);">
+            <div style="font-size:22px;font-weight:900;color:var(--primary-dark);">Kiai Academy</div>
+            <div style="font-size:12px;color:var(--text-muted);margin-top:4px;">Lanzamiento oficial<br>Portal + Videos + Docs</div>
+        </div>
+        <div class="neo-card-sm" style="text-align:center;border-left:4px solid var(--accent);">
+            <div style="font-size:22px;font-weight:900;color:var(--accent);">Vista Aliados</div>
+            <div style="font-size:12px;color:var(--text-muted);margin-top:4px;">Dashboard aliados<br>+ Sistema Multinivel</div>
+        </div>
+        <div class="neo-card-sm" style="text-align:center;border-left:4px solid #8b5cf6;">
+            <div style="font-size:22px;font-weight:900;color:#8b5cf6;">Notificaciones</div>
+            <div style="font-size:12px;color:var(--text-muted);margin-top:4px;">Centro completo<br>Vista marketing</div>
+        </div>
+    </div>
+
+    <div class="slide-footer">
+        <span>Kiai S.A.S — Planeación Q2 2026</span>
+        <span>Sprint 11 · 2–17 Jun</span>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 13 · SPRINT 12 🔥 CIERRE Q2                                  -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<section class="slide" data-nav="Sprint 12">
+    <div class="section-header">
+        <div class="section-icon">🏆</div>
+        <div>
+            <h2>Sprint 12 — <span style="color:var(--green);">CIERRE Q2</span></h2>
+            <p>18–30 Junio · 8 días hábiles disponibles · 60h/persona · Festivos: Lun 29 Jun (San Pedro y San Pablo) · Cierre de trimestre</p>
+        </div>
+    </div>
+
+    <div class="hito-card fade-in" style="margin-bottom:24px;background:linear-gradient(135deg,rgba(34,197,94,0.06),var(--bg-card));border-left-color:var(--green);">
+        <div class="hito-date" style="color:var(--green);">🏁 30 DE JUNIO — CIERRE Q2 2026</div>
+        <div class="hito-title">Entrega final · Retrospectiva · Preparación Q3</div>
+        <div class="hito-desc">Todos los objetivos del Q2 deben estar entregados o formalmente reprogramados con decisión ejecutiva · Reunión de comité · Presentación de resultados · Plan Q3 listo para arrancar el 1 de julio</div>
+    </div>
+
+    <div class="grid-2 fade-in" style="gap:20px;">
+        <div>
+            <p style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--green);margin-bottom:12px;"><i class="fa fa-check-double" style="margin-right:6px;"></i>Entregables Finales</p>
+            <ul class="task-list">
+                <li><span class="task-icon ti-critical"><i class="fa fa-flag-checkered"></i></span>Cierre formal de todos los ítems del Q2</li>
+                <li><span class="task-icon ti-teal"><i class="fa fa-file-invoice-dollar"></i></span>Nómina electrónica — módulo base entregado · continuidad funcional prevista para Q3</li>
+                <li><span class="task-icon ti-teal"><i class="fa fa-wallet"></i></span>Kiai Wallet — entrega primera versión</li>
+                <li><span class="task-icon ti-teal"><i class="fa fa-layer-group"></i></span>Sistema Multinivel — cierre</li>
+                <li><span class="task-icon ti-teal"><i class="fa fa-share-alt"></i></span>Plan Referido — diseño funcional consolidado para decisión de escalamiento en Q3</li>
+                <li><span class="task-icon ti-teal"><i class="fa fa-database"></i></span>Exponer Maestros de datos — cierre</li>
+            </ul>
+        </div>
+        <div>
+            <p style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--primary-dark);margin-bottom:12px;"><i class="fa fa-chart-line" style="margin-right:6px;"></i>Cierre & Retrospectiva</div>
+            <ul class="task-list">
+                <li><span class="task-icon ti-teal"><i class="fa fa-chart-bar"></i></span>Presentación métricas Q2 al comité directivo</li>
+                <li><span class="task-icon ti-teal"><i class="fa fa-sticky-note"></i></span>Retrospectiva técnica — lecciones aprendidas</li>
+                <li><span class="task-icon ti-teal"><i class="fa fa-forward"></i></span>Roadmap Q3 listo y presentado</li>
+                <li><span class="task-icon ti-teal"><i class="fa fa-users"></i></span>Reunión periódica aliados (5ª del Q2)</li>
+                <li><span class="task-icon ti-teal"><i class="fa fa-envelope-open-text"></i></span>Plantillas personalizadas de correos — marketing y aliados con trazabilidad</li>
+                <li><span class="task-icon ti-teal"><i class="fa fa-chart-line"></i></span>Métricas Customer Succed Q2 — entrega final</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="slide-footer">
+        <span>Kiai S.A.S — Planeación Q2 2026</span>
+        <span>Sprint 12 · 18–30 Jun 🔥 Cierre Q2</span>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 14 · CLIENTES ACTIVOS Q2                                    -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<section class="slide" data-nav="Clientes">
+    <div class="section-header">
+        <div class="section-icon">🤝</div>
+        <div>
+            <h2>Clientes e Integraciones Activas Q2</h2>
+            <p>Pipeline de integraciones con fechas definidas · Prioridad de entrega</p>
+        </div>
+    </div>
+
+    <div class="grid-3 fade-in" style="margin-bottom:24px;">
+        <div class="neo-card" style="border-top:4px solid #ec4899;">
+            <div style="font-size:22px;margin-bottom:8px;">🏥</div>
+            <p style="font-weight:800;font-size:15px;margin-bottom:8px;">Doctoralia</p>
+            <p style="font-size:12px;color:var(--text-light);margin-bottom:12px;">Portal nuevo + facturas en borrador · salida prevista al cierre de Sprint 7</p>
+            <div style="display:flex;flex-direction:column;gap:6px;">
+                <span class="tag tag-critical" style="display:inline-block;">Cierre Sprint 7 · Portal nuevo</span>
+                <span class="tag tag-critical" style="display:inline-block;">Cierre Sprint 7 · Facturas borrador</span>
+            </div>
+        </div>
+
+        <div class="neo-card" style="border-top:4px solid var(--accent);">
+            <div style="font-size:22px;margin-bottom:8px;">🚌</div>
+            <p style="font-weight:800;font-size:15px;margin-bottom:8px;">SuperTransportes</p>
+            <p style="font-size:12px;color:var(--text-light);margin-bottom:12px;">Integración API al 70% · Pruebas activas · Despliegue producción Sprint 9</p>
+            <div>
+                <div class="progress-item" style="margin-bottom:4px;">
+                    <div class="progress-header"><span>Avance</span><span>70%</span></div>
+                    <div class="progress-bar"><div class="progress-fill fill-yellow" style="width:70%;"></div></div>
+                </div>
+                <span class="tag tag-partial" style="margin-top:4px;display:inline-block;">Producción: Sprint 9 (May)</span>
+            </div>
+        </div>
+
+        <div class="neo-card" style="border-top:4px solid var(--blue);">
+            <div style="font-size:22px;margin-bottom:8px;">🚛</div>
+            <p style="font-weight:800;font-size:15px;margin-bottom:8px;">Terminales Medellín</p>
+            <p style="font-size:12px;color:var(--text-light);margin-bottom:12px;">Integración con Xenco al 70% · desarrollo de sección de código de barras · objetivo pre-junio</p>
+            <div>
+                <div class="progress-item" style="margin-bottom:4px;">
+                    <div class="progress-header"><span>Avance</span><span>70%</span></div>
+                    <div class="progress-bar"><div class="progress-fill fill-blue" style="width:70%;"></div></div>
+                </div>
+                <span class="tag tag-partial" style="margin-top:4px;display:inline-block;">Objetivo: pre-Junio · código de barras</span>
+            </div>
+        </div>
+
+        <div class="neo-card" style="border-top:4px solid #f59e0b;">
+            <div style="font-size:22px;margin-bottom:8px;">🧾</div>
+            <p style="font-weight:800;font-size:15px;margin-bottom:8px;">Kiramar</p>
+            <p style="font-size:12px;color:var(--text-light);margin-bottom:12px;">Implementación de colas y devolución de CUFE antes del envío a DIAN · compromiso que entra al Q2</p>
+            <div>
+                <span class="tag tag-partial" style="display:inline-block;">Q2 · Colas + validación CUFE</span>
+            </div>
+        </div>
+
+        <div class="neo-card" style="border-top:4px solid var(--green);">
+            <div style="font-size:22px;margin-bottom:8px;">🏫</div>
+            <p style="font-weight:800;font-size:15px;margin-bottom:8px;">Schoolpack</p>
+            <p style="font-size:12px;color:var(--text-light);margin-bottom:12px;">Worker 100% listo. Esperando confirmación del cliente para pasar a producción</p>
+            <span class="tag tag-done" style="display:inline-block;">Worker listo · Espera cliente</span>
+        </div>
+
+        <div class="neo-card" style="border-top:4px solid #8b5cf6;">
+            <div style="font-size:22px;margin-bottom:8px;">✍️</div>
+            <p style="font-weight:800;font-size:15px;margin-bottom:8px;">Kiai Firma</p>
+            <p style="font-size:12px;color:var(--text-light);margin-bottom:12px;">90% completado al cierre Q1 · despliegue productivo previsto al cierre de Sprint 7 sobre AWS · gestión usuarios/roles</p>
+            <span class="tag tag-critical" style="display:inline-block;">Cierre Sprint 7 · Prod AWS</span>
+        </div>
+
+        <div class="neo-card" style="border-top:4px solid var(--primary);">
+            <div style="font-size:22px;margin-bottom:8px;">📊</div>
+            <p style="font-weight:800;font-size:15px;margin-bottom:8px;">Proyective</p>
+            <p style="font-size:12px;color:var(--text-light);margin-bottom:12px;">Ya en producción · Ajustes Radian completados · Seguimiento continuo</p>
+            <span class="tag tag-done" style="display:inline-block;">✅ En producción</span>
+        </div>
+    </div>
+
+    <div class="slide-footer">
+        <span>Kiai S.A.S — Planeación Q2 2026</span>
+        <span>Clientes e Integraciones Q2</span>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 15 · PROYECCIÓN COMERCIAL                                   -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<section class="slide" data-nav="Proyección">
+    <div class="section-header">
+        <div class="section-icon">📈</div>
+        <div>
+            <h2>Proyección Comercial Habilitada por los Ajustes Q2</h2>
+            <p>Estimación conservadora del potencial de nuevos clientes si ejecutamos los frentes críticos del trimestre</p>
+        </div>
+    </div>
+
+    <div class="grid-4 fade-in" style="margin-bottom:24px;">
+        <div class="stat-card">
+            <div class="sc-num" style="color:var(--green);">230</div>
+            <div class="sc-label">Nuevos clientes<br><small>estimación conservadora</small></div>
+        </div>
+        <div class="stat-card">
+            <div class="sc-num" style="color:var(--accent);">90</div>
+            <div class="sc-label">Por menor fricción<br><small>Wompy + cobros + notificaciones</small></div>
+        </div>
+        <div class="stat-card">
+            <div class="sc-num" style="color:#8b5cf6;">60</div>
+            <div class="sc-label">Por activación comercial<br><small>plantillas, marketing y trazabilidad</small></div>
+        </div>
+        <div class="stat-card">
+            <div class="sc-num" style="color:var(--primary);">80</div>
+            <div class="sc-label">Por aliados / red<br><small>Kommo + vista aliados + multinivel</small></div>
+        </div>
+    </div>
+
+    <div class="grid-2 fade-in" style="gap:20px;margin-bottom:20px;">
+        <div class="neo-card">
+            <p style="font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--primary-dark);margin-bottom:12px;">Supuestos del cálculo</p>
+            <ul class="task-list">
+                <li><span class="task-icon ti-critical"><i class="fa fa-credit-card"></i></span><strong>Wompy + planes automáticos</strong> reducen abandono en compra y renovación</li>
+                <li><span class="task-icon ti-teal"><i class="fa fa-bell"></i></span><strong>Notificaciones y cobro</strong> mejoran conversión y recuperación de clientes inactivos</li>
+                <li><span class="task-icon ti-teal"><i class="fa fa-envelope-open-text"></i></span><strong>Plantillas personalizadas</strong> permiten a marketing y aliados impulsar campañas con control centralizado</li>
+                <li><span class="task-icon ti-teal"><i class="fa fa-share-alt"></i></span><strong>Kommo + vista aliados + multinivel</strong> ordenan el seguimiento comercial y la trazabilidad del lead</li>
+            </ul>
+        </div>
+
+        <div class="neo-card">
+            <p style="font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:12px;">Lectura gerencial</p>
+            <p style="font-size:13px;color:var(--text-light);line-height:1.6;margin-bottom:14px;">
+                El Q2 no solo busca entregar funcionalidad técnica. Busca <strong>quitar fricción de compra, mejorar seguimiento comercial y dar más herramientas a marketing y aliados</strong>.
+                Si esos frentes se ejecutan de forma consistente, estimamos un potencial conservador de <strong>230 nuevos clientes</strong>.
+            </p>
+            <div style="padding:14px;border-radius:var(--radius-sm);background:rgba(20,184,166,0.08);border-left:4px solid var(--primary);">
+                <p style="font-size:12px;color:var(--primary-dark);font-weight:700;margin-bottom:6px;">Nota</p>
+                <p style="font-size:12px;color:var(--text-light);">Esta cifra es una <strong>proyección habilitada</strong>, no una venta comprometida: depende de ejecución comercial, adopción del mercado y velocidad de salida de los entregables.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-footer">
+        <span>Kiai S.A.S — Planeación Q2 2026</span>
+        <span>Proyección Comercial</span>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 16 · KPIs Q2                                                -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<section class="slide" data-nav="KPIs">
+    <div class="section-header">
+        <div class="section-icon">📊</div>
+        <div>
+            <h2>KPIs & Métricas Q2 2026</h2>
+            <p>Indicadores de éxito del trimestre · Medibles y verificables</p>
+        </div>
+    </div>
+
+    <div class="grid-3 fade-in" style="gap:16px;margin-bottom:20px;">
+        <div class="kpi-card">
+            <div class="kpi-icon" style="background:rgba(34,197,94,0.12);">☁️</div>
+            <div>
+                <div class="kpi-label">AWS S3 Cold Storage</div>
+                <div class="kpi-value" style="color:var(--green);">>80% migrado</div>
+                <div class="kpi-sub">~120M registros objetivo · Deadline: 30 Abr</div>
+            </div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-icon" style="background:rgba(255,140,66,0.12);">💳</div>
+            <div>
+                <div class="kpi-label">Pasarela Wompy</div>
+                <div class="kpi-value" style="color:var(--accent);">LIVE</div>
+                <div class="kpi-sub">Cobro automático activo · Mayo</div>
+            </div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-icon" style="background:rgba(135,202,193,0.15);">🔢</div>
+            <div>
+                <div class="kpi-label">API .NET 8 Versionamiento</div>
+                <div class="kpi-value" style="color:var(--primary-dark);">100%</div>
+                <div class="kpi-sub">Migración Legacy → V1 JWT completa</div>
+            </div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-icon" style="background:rgba(34,197,94,0.12);">📝</div>
+            <div>
+                <div class="kpi-label">Documentación Portal</div>
+                <div class="kpi-value" style="color:var(--green);">100%</div>
+                <div class="kpi-sub">GIFs + FAQs + Guías usuario · Sprint 7</div>
+            </div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-icon" style="background:rgba(245,158,11,0.12);">🤖</div>
+            <div>
+                <div class="kpi-label">Auto-cobro / Recordatorios</div>
+                <div class="kpi-value" style="color:var(--yellow);">LIVE</div>
+                <div class="kpi-sub">Recordatorios pago automatizados</div>
+            </div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-icon" style="background:rgba(139,92,246,0.12);">🎓</div>
+            <div>
+                <div class="kpi-label">Kiai Academy</div>
+                <div class="kpi-value" style="color:#8b5cf6;">Lanzado</div>
+                <div class="kpi-sub">Módulo portal + contenido · Sprint 11</div>
+            </div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-icon" style="background:rgba(59,130,246,0.12);">📤</div>
+            <div>
+                <div class="kpi-label">Leads a Kommo</div>
+                <div class="kpi-value" style="color:var(--blue);">Auto</div>
+                <div class="kpi-sub">Nuevo cliente = nuevo lead automático</div>
+            </div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-icon" style="background:rgba(255,140,66,0.12);">🚌</div>
+            <div>
+                <div class="kpi-label">API SuperTransportes</div>
+                <div class="kpi-value" style="color:var(--accent);">Producción</div>
+                <div class="kpi-sub">100% · Deadline: Sprint 9 (Mayo)</div>
+            </div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-icon" style="background:rgba(34,197,94,0.12);">🤝</div>
+            <div>
+                <div class="kpi-label">Reuniones Aliados</div>
+                <div class="kpi-value" style="color:var(--green);">≥5</div>
+                <div class="kpi-sub">1 por sprint / mes durante el Q2</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-footer">
+        <span>Kiai S.A.S — Planeación Q2 2026</span>
+        <span>KPIs Q2</span>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 16 · EQUIPO & CAPACIDAD                                      -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<section class="slide" data-nav="Equipo">
+    <div class="section-header">
+        <div class="section-icon">👥</div>
+        <div>
+            <h2>Equipo & Capacidad Q2</h2>
+            <p>5 integrantes · IA integrada en el flujo de trabajo · Sprints 7–12</p>
+        </div>
+    </div>
+
+    <div class="grid-3 fade-in" style="margin-bottom:24px;">
+        <div class="team-card">
+            <div class="team-avatar" style="background:linear-gradient(135deg,var(--primary),var(--primary-dark));">👩‍💻</div>
+            <div class="team-name">Maritza Ruiz</div>
+            <div class="team-role">Líder de Desarrollo · CTO</div>
+            <div class="team-skills">
+                <span class="skill-tag">.NET / C#</span>
+                <span class="skill-tag">AWS</span>
+                <span class="skill-tag">Arquitectura</span>
+                <span class="skill-tag">Integraciones</span>
+            </div>
+        </div>
+
+        <div class="team-card">
+            <div class="team-avatar" style="background:linear-gradient(135deg,var(--accent),var(--accent-dark));">👩‍🎨</div>
+            <div class="team-name">María Angélica Sánchez</div>
+            <div class="team-role">Desarrolladora Full Stack</div>
+            <div class="team-skills">
+                <span class="skill-tag">Angular</span>
+                <span class="skill-tag">TypeScript</span>
+                <span class="skill-tag">UI / UX</span>
+            </div>
+        </div>
+
+        <div class="team-card">
+            <div class="team-avatar" style="background:linear-gradient(135deg,#8b5cf6,#7c3aed);">👨‍💻</div>
+            <div class="team-name">Miguel Sánchez</div>
+            <div class="team-role">Desarrollador Full Stack</div>
+            <div class="team-skills">
+                <span class="skill-tag">.NET</span>
+                <span class="skill-tag">APIs</span>
+                <span class="skill-tag">Integraciones</span>
+            </div>
+        </div>
+
+        <div class="team-card">
+            <div class="team-avatar" style="background:linear-gradient(135deg,#3b82f6,#2563eb);">👩‍💼</div>
+            <div class="team-name">Laura Galeano</div>
+            <div class="team-role">Customer Success</div>
+            <div class="team-skills">
+                <span class="skill-tag">Atención cliente</span>
+                <span class="skill-tag">Base de conocimiento</span>
+                <span class="skill-tag">NPS & Satisfacción</span>
+            </div>
+        </div>
+
+        <div class="team-card">
+            <div class="team-avatar" style="background:linear-gradient(135deg,#ec4899,#db2777);">👨‍🎨</div>
+            <div class="team-name">Juan David López</div>
+            <div class="team-role">Marketing y Comunicación</div>
+            <div class="team-skills">
+                <span class="skill-tag">Diseño visual</span>
+                <span class="skill-tag">Presencia digital</span>
+                <span class="skill-tag">Customer Succed comercial</span>
+            </div>
+        </div>
+
+        <div class="neo-card" style="display:flex;flex-direction:column;justify-content:center;gap:14px;">
+            <p style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);">Capacidad Q2</p>
+            <div>
+                <div class="progress-header"><span>Sprint 7 (activo)</span><span>75h/pers</span></div>
+                <div class="progress-bar"><div class="progress-fill fill-green" style="width:100%;"></div></div>
+            </div>
+            <div>
+                <div class="progress-header"><span>Sprints 8, 9, 10 y 11</span><span>75h/pers</span></div>
+                <div class="progress-bar"><div class="progress-fill fill-teal" style="width:100%;"></div></div>
+            </div>
+            <div>
+                <div class="progress-header"><span>Sprint 12 · Cierre Q2</span><span>60h/pers</span></div>
+                <div class="progress-bar"><div class="progress-fill fill-orange" style="width:80%;"></div></div>
+            </div>
+            <p style="font-size:13px;color:var(--text-muted);"><strong style="color:var(--primary-dark);">~435h</strong> por persona en el Q2</p>
+        </div>
+    </div>
+
+    <div class="slide-footer">
+        <span>Kiai S.A.S — Planeación Q2 2026</span>
+        <span>Equipo & Capacidad</span>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 17 · RIESGOS & MITIGACIÓN                                   -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<section class="slide" data-nav="Riesgos">
+    <div class="section-header">
+        <div class="section-icon">⚠️</div>
+        <div>
+            <h2>Riesgos & Mitigación Q2</h2>
+            <p>Factores que pueden afectar la ejecución · Plan de respuesta</p>
+        </div>
+    </div>
+
+    <div class="grid-2 fade-in" style="gap:20px;">
+        <div class="risk-card">
+            <span class="risk-level rl-medium">Riesgo Medio</span>
+            <div class="risk-title">🧑‍💼 Carga de Customer Succed absorbe capacidad de desarrollo</div>
+            <div class="risk-mit">
+                <strong>Mitigación:</strong> En Q1 Customer Succed absorbió el 90% del tiempo de liderazgo. Para Q2 el equipo tiene autonomía creciente y la base de conocimiento está más completa. Se reserva al menos 3 días por sprint para acompañamiento de Customer Succed.
+            </div>
+        </div>
+
+        <div class="risk-card" style="border-left-color:var(--red);">
+            <span class="risk-level rl-high">Riesgo Alto</span>
+            <div class="risk-title">📅 Clientes con fechas fijas inamovibles</div>
+            <div class="risk-mit">
+                <strong>Mitigación:</strong> Cierre Sprint 7 (portales AWS + Doctoralia), S3 (30 Abr), Wompy (Mayo). Sprint 7 y 8 están explícitamente priorizados para estas fechas. Cualquier ítem nuevo en Sprint 7–8 debe pasar por aprobación del liderazgo.
+            </div>
+        </div>
+
+        <div class="risk-card">
+            <span class="risk-level rl-medium">Riesgo Medio</span>
+            <div class="risk-title">📦 Alcance del backlog excede capacidad disponible</div>
+            <div class="risk-mit">
+                <strong>Mitigación:</strong> El backlog Q2 es ambicioso. Los objetivos 7–9 (protección de ingresos) son innegociables. Kiai Wallet, Nómina y Plan Referido se gestionan por fases, con alcance controlado en Q2 y continuidad definida por priorización ejecutiva hacia Q3.
+            </div>
+        </div>
+
+        <div class="risk-card">
+            <span class="risk-level rl-medium">Riesgo Medio</span>
+            <div class="risk-title">🔗 Dependencias externas (Wompy, clientes, DIAN)</div>
+            <div class="risk-mit">
+                <strong>Mitigación:</strong> Iniciar contacto con Wompy en Sprint 8 para tener credenciales a tiempo en Sprint 9. Documentar dependencias del lado del cliente (Schoolpack, Transportes) con fecha límite. Mantener comunicación semanal.
+            </div>
+        </div>
+
+        <div class="risk-card" style="border-left-color:var(--green);">
+            <span class="risk-level rl-low">Riesgo Bajo</span>
+            <div class="risk-title">🗓️ Festivos Colombia — 7 días perdidos</div>
+            <div class="risk-mit">
+                <strong>Mitigación:</strong> Ya contabilizados en la capacidad de cada sprint. El calendario quedó reorganizado en bloques consecutivos de 10 días hábiles desde el 1 de abril; el Sprint 12 cierra Q2 con 8 días hábiles disponibles hasta el 30 de junio.
+            </div>
+        </div>
+
+        <div class="risk-card" style="border-left-color:var(--green);">
+            <span class="risk-level rl-low">Riesgo Bajo</span>
+            <div class="risk-title">⚡ Deuda técnica del Portal Angular post-lanzamiento</div>
+            <div class="risk-mit">
+                <strong>Mitigación:</strong> Sprint 7 incluye semana dedicada a documentación y corrección de bugs post-lanzamiento. El portal ya tiene 97% de paridad funcional con Lappiz — la deuda técnica es manejable.
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-footer">
+        <span>Kiai S.A.S — Planeación Q2 2026</span>
+        <span>Riesgos & Mitigación</span>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 18 · DECISIONES Y APUESTAS DEL Q2                            -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<section class="slide slide-closing" data-nav="Cierre">
+    <div style="max-width:800px;text-align:center;">
+        <div class="cover-badge" style="margin:0 auto 24px;">Cierre ejecutivo</div>
+        <h2 style="font-size:40px;font-weight:900;background:linear-gradient(135deg,var(--primary-dark),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:12px;">Decisiones y Apuestas del Q2</h2>
+        <p style="color:var(--text-light);font-size:15px;margin-bottom:36px;">Las prioridades del trimestre se concentran en proteger ingresos, escalar operación y habilitar crecimiento</p>
+    </div>
+
+    <div class="grid-3 fade-in" style="max-width:900px;margin:0 auto 40px;gap:20px;">
+        <div class="neo-card" style="text-align:center;">
+            <div style="font-size:28px;margin-bottom:8px;">💰</div>
+            <p style="font-weight:700;margin-bottom:6px;">Proteger ingresos</p>
+            <p style="font-size:12px;color:var(--text-muted);">Wompy, planes automáticos, notificaciones y trazabilidad comercial para reducir fricción, mejorar recaudo y cuidar la base activa</p>
+        </div>
+        <div class="neo-card" style="text-align:center;">
+            <div style="font-size:28px;margin-bottom:8px;">🚀</div>
+            <p style="font-weight:700;margin-bottom:6px;">Escalar la operación</p>
+            <p style="font-size:12px;color:var(--text-muted);">Migración a AWS, desacople de servicios, infraestructura como código y mayor resiliencia para soportar crecimiento con seguridad y control</p>
+        </div>
+        <div class="neo-card" style="text-align:center;">
+            <div style="font-size:28px;margin-bottom:8px;">📈</div>
+            <p style="font-weight:700;margin-bottom:6px;">Habilitar crecimiento</p>
+            <p style="font-size:12px;color:var(--text-muted);">Kiai Wallet, vista aliados, multinivel, Academy y plantillas de correos como base para acelerar adquisición y fidelización en el segundo semestre</p>
+        </div>
+    </div>
+
+    <div style="text-align:center;" class="fade-in">
+        <div style="background:var(--bg-card);box-shadow:var(--shadow-out);border-radius:var(--radius);padding:32px 60px;display:inline-block;">
+            <p style="font-size:26px;font-weight:900;color:var(--primary-dark);margin-bottom:8px;">Q2: foco, priorización y ejecución disciplinada</p>
+            <p style="font-size:14px;color:var(--text-muted);">Proteger caja · consolidar plataforma · preparar crecimiento</p>
+        </div>
+        <p style="margin-top:24px;font-size:13px;color:var(--text-muted);">Comité directivo · Planeación corporativa Q2 2026</p>
+        <p style="margin-top:6px;font-size:12px;color:var(--text-muted);">Maritza Ruiz · Líder Técnica · Kiai S.A.S · Abril 2026</p>
+    </div>
+
+    <div class="slide-footer">
+        <span>Kiai S.A.S — Planeación Q2 2026</span>
+        <span>Decisiones y apuestas del Q2</span>
+    </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 19 · AGRADECIMIENTO FINAL                                   -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<section class="slide slide-closing" data-nav="Gracias">
+    <div style="max-width:820px;text-align:center;">
+        <div class="cover-badge" style="margin:0 auto 24px;">Cierre</div>
+        <h2 style="font-size:44px;font-weight:900;background:linear-gradient(135deg,var(--primary-dark),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:16px;">Gracias por su atención</h2>
+        <p style="color:var(--text-light);font-size:16px;line-height:1.7;margin-bottom:34px;">
+            Agradecemos al comité y a todo el equipo por el acompañamiento, la confianza y el compromiso con la ejecución del Q2.
+        </p>
+    </div>
+
+    <div class="neo-card fade-in" style="max-width:760px;margin:0 auto 28px;text-align:center;">
+        <p style="font-size:18px;font-weight:800;color:var(--primary-dark);margin-bottom:10px;">Seguimos construyendo una Kiai más escalable, estable y preparada para crecer.</p>
+        <p style="font-size:14px;color:var(--text-muted);">Infraestructura · Producto · Customer Success · Marketing · Operación</p>
+    </div>
+
+    <div style="text-align:center;" class="fade-in">
+        <p style="font-size:14px;color:var(--text-muted);margin-bottom:8px;">Comité directivo · Planeación corporativa Q2 2026</p>
+        <p style="font-size:12px;color:var(--text-muted);">Maritza Ruiz · Líder Técnica · Kiai S.A.S</p>
+    </div>
+
+    <div class="slide-footer">
+        <span>Kiai S.A.S — Planeación Q2 2026</span>
+        <span>Gracias</span>
+    </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- JAVASCRIPT                                                         -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<script>
+    const slides = document.querySelectorAll('.slide');
+    const progressBar = document.getElementById('progress-bar');
+    const slideCounter = document.getElementById('slide-counter');
+    const navContainer = document.getElementById('navDots');
+
+    // Build nav dots
+    slides.forEach((slide, i) => {
+        const dot = document.createElement('button');
+        dot.className = 'nav-dot';
+        dot.title = slide.dataset.nav || `Slide ${i + 1}`;
+        dot.addEventListener('click', () => slide.scrollIntoView({ behavior: 'smooth' }));
+        navContainer.appendChild(dot);
+    });
+
+    const navDots = document.querySelectorAll('.nav-dot');
+
+    // Update progress + counter + active dot on scroll
+    const slideObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && entry.intersectionRatio >= 0.4) {
+                const idx = [...slides].indexOf(entry.target);
+                navDots.forEach((d, i) => d.classList.toggle('active', i === idx));
+                const pct = ((idx + 1) / slides.length) * 100;
+                progressBar.style.width = pct + '%';
+                slideCounter.textContent = `${idx + 1} / ${slides.length}`;
+            }
+        });
+    }, { threshold: 0.4 });
+
+    slides.forEach(s => slideObserver.observe(s));
+
+    // Fade-in on scroll
+    const fadeObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) entry.target.classList.add('visible');
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        const idx = [...slides].findIndex(s => {
+            const r = s.getBoundingClientRect();
+            return r.top >= -80 && r.top <= window.innerHeight * 0.5;
+        });
+        if (['ArrowDown', 'PageDown', ' '].includes(e.key)) {
+            e.preventDefault();
+            slides[Math.min(idx + 1, slides.length - 1)].scrollIntoView({ behavior: 'smooth' });
+        }
+        if (['ArrowUp', 'PageUp'].includes(e.key)) {
+            e.preventDefault();
+            slides[Math.max(idx - 1, 0)].scrollIntoView({ behavior: 'smooth' });
+        }
+    });
+
+    // Init counter
+    slideCounter.textContent = `1 / ${slides.length}`;
+    progressBar.style.width = `${(1 / slides.length) * 100}%`;
+    if (navDots[0]) navDots[0].classList.add('active');
+</script>
+
+</body>
+</html>
